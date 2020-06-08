@@ -3,74 +3,208 @@
 // storymap_data can be an URL or a Javascript object
 let storymap_data = 'data/volcanoes.json';
 
-// certain settings must be passed within a separate options object
-// let storymap_options = {};
-//
-// let storymap = new VCO.StoryMap('mapdiv', storymap_data, storymap_options);
-// window.onresize = function(event) {
-//     storymap.updateDisplay(); // this isn't automatic
-// }
-
-// Create map object
-let mymap = L.map('map', {
-  center: [39.8282, -98.5795],
-  zoom: 3,
-  maxZoom: 10,
-  minZoom: 3,
-  detectRetina: true
+mapboxgl.accessToken = 'pk.eyJ1IjoiaXNnYXJjaWE4IiwiYSI6ImNrOGY1b2h0YTAwdXMzbG56OGk3ZG51b3gifQ.nb--h6CKMb-Go93dNnuAZg';
+var map = new mapboxgl.Map({
+container: '<your HTML element id>',
+style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+center: [-74.5, 40], // starting position [lng, lat]
+zoom: 9 // starting zoom
 });
 
-let volcanoes = null;
+(function ($) {
 
-// add base mymap
-L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(mymap);
+    $.fn.storymap = function(options) {
 
-var colors = chroma.scale('Set2').mode('lch').colors(2);
+        var defaults = {
+            selector: '[data-scene]',
+            breakpointPos: '33.333%',
+            legend: false,
+            createMap: function () {
+                var map = L.map('map', {zoomControl: false}).setView([44, -120], 7);
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiaXNnYXJjaWE4IiwiYSI6ImNrOGY1b2h0YTAwdXMzbG56OGk3ZG51b3gifQ.nb--h6CKMb-Go93dNnuAZg', {
+                    maxZoom: 18,
+                    attribution: '',
+                    id: 'mapbox.light'
+                }).addTo(map);
+                return map;
+            }
+        };
 
-// dynamically append style classes to this page. This style classes will be used for colorize the markers.
-for (i = 0; i < 2; i++) {
-    $('head').append($("<style> .marker-color-" + (i + 1).toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
-}
+        var settings = $.extend(defaults, options);
 
-// add airports to the map
-// add airports GeoJson data
-volcanoes = L.geoJson.ajax("assets/volcanoes.json", {
-  onEachFeature: function (feature, layer) {
-    layer.bindPopup(feature.properties.V_Name);
-},
-  pointToLayer: function (feature, latlng){
-    let id = 0;
-    if(feature.properties.H_active == 0){
-      id = 0;
-    }else{
-      id = 1;
+        if (typeof(L) === 'undefined') {
+            throw new Error('Storymap requires Laeaflet');
+        }
+
+        function getDistanceToTop(elem, top) {
+            var docViewTop = $(window).scrollTop();
+
+            var elemTop = $(elem).offset().top;
+
+            var dist = elemTop - docViewTop;
+
+            var d = top - dist;
+
+            if (d < 0) {
+                return $(document).height();
+            }
+            return d;
+        }
+
+        function highlightTopPara(paragraphs, top) {
+
+            var distances = $.map(paragraphs, function (element) {
+                var dist = getDistanceToTop(element, top);
+                return {el: $(element), distance: dist};
+            });
+
+            function findMin(pre, cur){
+                if (pre.distance > cur.distance) {
+                    return cur;
+                } else {
+                    return pre;
+                }
+            }
+
+            var closest = distances.reduce(findMin);
+
+            $.each(paragraphs, function (key, element) {
+                var paragraph = $(element);
+                if (paragraph[0] !== closest.el[0]) {
+                    paragraph.trigger('notviewing');
+                }
+            });
+
+            if (!closest.el.hasClass('viewing')) {
+                closest.el.trigger('viewing');
+            }
+        }
+
+        function watchHighlight(element, searchfor, top) {
+            var paragraphs = element.find(searchfor);
+            highlightTopPara(paragraphs, top);
+            $(window).scroll(function () {
+                highlightTopPara(paragraphs, top);
+            });
+        }
+
+        var makeStoryMap = function (element, scenes, layers) {
+
+            var topElem = $('<div class="breakpoint-current"></div>')
+                .css('top', settings.breakpointPos);
+            $('body').append(topElem);
+
+            var top = topElem.offset().top - $(window).scrollTop();
+
+            var searchfor = settings.selector;
+
+            var paragraphs = element.find(searchfor);
+
+            paragraphs.on('viewing', function () {
+                $(this).addClass('viewing');
+            });
+
+            paragraphs.on('notviewing', function () {
+                $(this).removeClass('viewing');
+            });
+
+            watchHighlight(element, searchfor, top);
+
+            var downBtn = element.find('.arrow-down');
+
+            downBtn.click(function () {
+                window.scrollBy(0, $(window).height() / 3);
+            });
+
+            var map = settings.createMap();
+            var currentLayerGroup = L.layerGroup().addTo(map);
+            var legendControl = L.control({position: 'topright'});
+
+            $.each(paragraphs, function (key, element) {
+                var paragraph = $(element);
+                if (paragraph[0].className == 'viewing') {
+                    var scene = scenes[paragraph[0].attributes['data-scene'].value];
+                    map.setView([scene.lat, scene.lng], scene.zoom);
+                    var layernames = scene.layers;
+                    var legendContent = "";
+                    if(typeof layernames !== 'undefined') {
+                        for (var i = 0; i < layernames.length; i++) {
+                            //add new layers
+                            currentLayerGroup.addLayer(layers[layernames[i]][0]);
+
+                            //add new legends
+                            if (layers[layernames[i]].length == 2) {
+                                legendContent += layers[layernames[i]][1];
+                            }
+                        }
+
+                    }
+
+                    legendControl.onAdd = function () {
+                        var div = new L.DomUtil.create('div', 'legend');
+                        div.innerHTML = legendContent;
+                        return div;
+                    };
+
+                    if (settings.legend == true && legendContent != "")
+                    {
+                        legendControl.addTo(map);
+                    }
+
+                }
+
+            });
+
+            function showMapView(key) {
+
+                currentLayerGroup.clearLayers();
+
+                if (settings.legend == true)
+                {
+                    legendControl.remove();
+                }
+
+                var scene = scenes[key];
+
+                var layernames = scene.layers;
+                var legendContent = "";
+                if(typeof layernames !== 'undefined'){
+                    for (var i=0; i < layernames.length; i++)
+                    {
+                        currentLayerGroup.addLayer(layers[layernames[i]][0]);
+
+                        if (layers[layernames[i]].length == 2)  {
+                            legendContent += layers[layernames[i]][1];
+                        }
+                    }
+                }
+
+                legendControl.onAdd = function () {
+                    var div = new L.DomUtil.create('div', 'legend');
+                    div.innerHTML = legendContent;
+                    return div;
+                };
+
+                // the condition legendContent != "" will make sure the legend will only be added on when there is content in the legend.
+                if (settings.legend == true && legendContent != "")
+                {
+                    legendControl.addTo(map);
+                }
+
+
+                // if you don't want to show a marker at the center of the map, you can simply comment the following line.
+                // currentLayerGroup.addLayer(L.marker([scene.lat, scene.lon]));
+
+                map.setView([scene.lat, scene.lng], scene.zoom, 1);
+            }
+
+            paragraphs.on('viewing', function () {
+                showMapView($(this).data('scene'));
+            });
+        };
+
+        makeStoryMap(this, settings.scenes, settings.layers);
+        return this;
     }
-    return L.marker(latlng, {
-      icon: L.divIcon({
-        className: 'fas fa-mountain marker-color-' + (id + 1).toString()
-      })
-    });
-  },
-  attribution: 'Volcano Data &copy; USGS | US States &copy; Mike Bostock | Base Map &copy; CartoDB | Made By Isabella Garcia'
-}).addTo(mymap);
 
-let legend = L.control({
-  position: 'topright'
-});
-
-legend.onAdd = function(){
-  let div = L.DomUtil.create('div', 'legend');
-  div.innerHTML += '<b>Number of Vocanoes</b><br />';
-    div.innerHTML += '<i class="fas fa-mountain marker-color-1"></i><p> not active</p>';
-    div.innerHTML += '<i class="fas fa-mountain marker-color-2"></i><p> active</p>';
-
-    //return the legend div containing the html content
-    return div;
-};
-
-// add legend to Map
-legend.addTo(mymap);
-
-
-// add scale bar
-L.control.scale({position: 'bottomleft'}).addTo(mymap);
+}(jQuery));
