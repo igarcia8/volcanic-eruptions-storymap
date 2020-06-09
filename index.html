@@ -1,187 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <title>Volcanoes</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Volcanoes</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--add required stylesheets-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--leaflet css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
 
+    <!--add favicon for the web page-->
+    <link rel="shortcut icon" href="../../img/favicon.ico" type="image/x-icon">
 
-  <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
+    <!--Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
 
 
-  <!--add required stylesheets-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <!--leaflet css-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="css/storymap.2.5.css">
+    <!--add required libraries-->
 
-  <!--add favicon for the web page-->
-  <link rel="shortcut icon" href="../../img/favicon.ico" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
+    <!--jquery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 
-  <!--Font-->
-  <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
+    <!--boostrap-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!--leaflet.ajax for asynchronously adding geojson data-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="../../dist/storymap.2.5.css">
-  <!--add required libraries-->
+    <!--mini globle map-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+    <script src="../../js/globeminimap.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
-  <!--jquery-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-
-  <!--boostrap-->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <!--leaflet.ajax for asynchronously adding geojson data-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
-
-  <!--story map plugin-->
-  <script src="js/index.js"></script>
-
-  <style>
-  #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-</style>
+    <!--story map plugin-->
+    <script src="js/storymap.2.5.js"></script>
 </head>
-
 <body>
 
-
-  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark storymap-navbar">
-    <a class="navbar-brand" href="#">Volcanoes in the World</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="javascript:window.scrollBy(0, $('section[data-scene=\'scene1\']').offset().top - $(window).scrollTop() - $('.storymap-navbar').height() - 30);">Background</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="javascript:window.scrollBy(0, $('section[data-scene=\'scene2\']').offset().top - $(window).scrollTop() - $('.storymap-navbar').height() - 30);">Major&nbsp;Eruptions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="javascript:window.scrollBy(0, $('section[data-scene=\'scene3\']').offset().top - $(window).scrollTop() - $('.storymap-navbar').height() - 30);">Active&nbsp;Volcanoes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="javascript:window.scrollBy(0, $('section[data-scene=\'scene4\']').offset().top - $(window).scrollTop() - $('.storymap-navbar').height() - 30);">Effects</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="javascript:window.scrollBy(0, $('section[data-scene=\'scene5\']').offset().top - $(window).scrollTop() - $('.storymap-navbar').height() - 30);">How&nbsp;To&nbsp;Help</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <div id="storymap" class="container-fluid storymap" >
-    <div class="row">
-      <div class="col-sm-6 col-md-4 storymap-story">
-        <section data-scene="overview" data-background="img/home-volcano-eruption.jpg">
-          <div class="fullscreen text-center">
-            <!-- FIX LATER -->
-            <h1 class="display-4 d-flex justify-content-center">^^^^^^^^^^^^</h1>
-
-            <small class="d-flex justify-content-center" style="color: rgba(255,255,255,0.95)">This story map
-              illustrates the volcanoes on Earth
-            </small>
-          </div>
-        </section>
-        <section data-scene="scene1" class="viewing">
-          <h2>Common Types of Volcanoes</h2>
-          <img src="img/shapes.jpg" class="img-responsive" alt="responsive image" alt-text="Shapes of volcanoes" style="width: 100%;">
-          <h3>Cinder Cone</h3>
-          <p>
-            Cinder cone volcanoes are the most common type of volcanoes. Cinder cone volcanoes have the shape that most people think of volcanoes.
-          </p>
-          <h3>Stratovolcanoes / Composite</h3>
-          <ul>
-            <li> Built of lava flow, ash and blocks of unmelted stone</li>
-            <li> Most violent type of volcano </li>
-            <li> Example: Mount St. Helens </li>
-          </ul>
-          <p>Stratovolcanoes or Composite volcanoes form from a conduit system of vents from a magma reservoir beneath the surface.</p>
-          <h3>Shield volcanoes</h3>
-          <ul>
-            <li> Example: Mauna Loa </li>
-          </ul>
-          <p>Shield volcanoes have a little slope and the resulting shape of a 'shield'. They are built of very thin lava spreading from the central vent to all directions. </p>
-          <h3>Lava Domes</h3>
-          <ul>
-            <li> Lava domes are built from very viscous lava </li>
-            <li> They are often formed in the craters of stratovolcanoes </li>
-          </ul>
-        </section>
-        <section data-scene="scene2" >
-          <h2>Major Eruptions</h2>
-          <p> VEI or Volcanic Explosivity Index is calculated by the volume of material erupted. It is a relative measure of the explosiveness of volcanic eruptions. The higher the number, the more explosive.
-            <h3>Yellowstone (640K years ago)</h3>
-            <img src="img/yellowstone.jpg" class="img-responsive" alt="responsive image" alt-text="yellowstone" style="width: 100%;">
-            <p>
-              Yellowstone National Park in Wyoming, USA is an active volcano itself. There are 3 recent eruptions with magnitude-8 (VEI 8) that we know of with varying amounts of volume.
-            </p>
-            <ul>
-              <li> 0.64 million years ago: 1,000 km^3 </li>
-              <li> 1.3 million years ago: 280 km^3 </li>
-              <li> 2.1 million years ago: 2,500 km^3 </li>
-            </ul>
-            <p> In comparison, the volume of the Puget Sound in Washington is 110km^3 </p>
-            <h3>Mount Vesuvius (79 AD)</h3>
-            <img src="img/mtvesuvius.jpg" class="img-responsive" alt="responsive image" alt-text="Mount Vesuvius" style="width: 100%;">
-            <p>
-              Mount Vesuvius in Italy is perhaps one of the more well known volcanoes in history. It is currently the only active volcano in Italy. Although its most recent eruption was in 1944, its most famous eruption dates back to 79 AD. This eruption destroyed the Roman cities of Pompeii and Herculaneum.
-            </p>
-            <h3>Huaynaputina (1600)</h3>
-            <img src="img/huaynaputina.jpg" class="img-responsive" alt="responsive image" alt-text="Huaynaputina" style="width: 100%;">
-            <p>
-              Huaynaputina in Peru is the site of South America's largest volcanic eruption with VEI 6. The effects of the eruption affected the global climate with the coldest summers in 500 years.
-            </p>
-            <h3>Mount Pinatubo (1991)</h3>
-            <img src="img/mtpinatubo.jpg" class="img-responsive" alt="responsive image" alt-text="Mount Pinatubo" style="width: 100%;">
-            <p>
-              Mount Pinatubo in the Philippines erupted recently in 1991 with VEI 6. The volcano erupted more than a cubic mile into the air and the ash rose 22 miles in the atmosphere.
-            </p>
-          </section>
-          <section data-scene="scene3">
-            <h2>Map of All Active Volcanoes</h2>
-          </section>
-          <section data-scene="scene4">
-            <h2>Effects of Eruptions of Society</h2>
-            <p>There are many effects eruptions can have. Homes are destroyed and the air is not safe to breath due to the ash everywhere. Depending on how much ash is deposited, it can break rooftops with the volume and weight. Volcanic eruptions can also affect the climate such as seen with Mount Tambora's eruption leading to the "Year Without Summer". <p>
-            </section>
-            <section data-scene="scene5">
-              <h2>How to Help</h2>
-              <p>Volcano observatories are a crucial tool for governments to reduce the impacts of volcanic eruptions. Governments, scientists, and local citizens are responsible to support the efforts of these institutions to make those at risk safer. Here are ways to support volcano observations</p>
-              <ul>
-                <li>
-                  <img src="img/usgs.PNG" alt="USGS logo" />
-                  <a href="https://volcanoes.usgs.gov/index.html">USGS science for a changing world</a>
-                </li>
-                <li>
-                  <img src="img/epa.PNG" alt="EPA logo" />
-                  <a href="https://www.epa.gov/natural-disasters/volcanoes">US Environmental Protection Agency</a>
-                </li>
-                <li>
-                  <a href="https://temblor.net/earthquake-insights/volcano-observatories-reduce-risk-around-the-globe-heres-how-we-can-support-them-10848/">Further Reading on Support</a>
-                </li>
-              </ul>
-            </section>
-          </div>
-          <div id="map" class="col-sm-6 col-md-8 sidebar"></div>
+<div id="storymap" class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 col-md-4 storymap-story">
+      <section data-scene="overview" data-background="img/home-volcano-eruption.jpg">
+        <div class="fullscreen text-center">
+          <h1 class="display-4 d-flex justify-content-center">Volcanoes Across the Globe</h1>
         </div>
-      </div>
+      </section>
+      <section data-scene="kinds" >
 
-      <footer></footer>
+        <h2>Common Types of Volcanoes</h2>
+        <img src="img/shapes.jpg" class="img-responsive" alt="responsive image" alt-text="Shapes of volcanoes" >
+        <h3>Cinder Cone</h3>
+        <p>
+          Cinder cone volcanoes are the most common type of volcanoes. Cinder cone volcanoes have the shape that most people think of volcanoes.
+        </p>
+        <h3>Stratovolcanoes / Composite</h3>
+        <ul>
+          <li> Built of lava flow, ash and blocks of unmelted stone</li>
+          <li> Most violent type of volcano </li>
+          <li> Example: Mount St. Helens </li>
+        </ul>
+        <p>Stratovolcanoes or Composite volcanoes form from a conduit system of vents from a magma reservoir beneath the surface.</p>
+        <h3>Shield volcanoes</h3>
+        <ul>
+          <li> Example: Mauna Loa </li>
+        </ul>
+        <p>Shield volcanoes have a little slope and the resulting shape of a 'shield'. They are built of very thin lava spreading from the central vent to all directions. </p>
+        <h3>Lava Domes</h3>
+        <ul>
+          <li> Lava domes are built from very viscous lava </li>
+          <li> They are often formed in the craters of stratovolcanoes </li>
+        </ul>
 
-      <script type="text/javascript">
-      mapboxgl.accessToken = 'pk.eyJ1IjoiaXNnYXJjaWE4IiwiYSI6ImNrOGY1b2h0YTAwdXMzbG56OGk3ZG51b3gifQ.nb--h6CKMb-Go93dNnuAZg';
-      var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/isgarcia8/ckb7c16df17cw1io1ubjsyjl8',
-        center: [-175.945642, 33.868457],
-        zoom: 1
-      });
-      </script>
+      </section>
 
-      <div class="storymap-trigger" style="top: 30%;"></div>
-    </body>
+      <section data-scene="eruptions">
+        <h2>Major Eruptions</h2>
+        <p> VEI or Volcanic Explosivity Index is calculated by the volume of material erupted. It is a relative measure of the explosiveness of volcanic eruptions. The higher the number, the more explosive.
+        </section>
 
-    </html>
+        <section data-scene="yellowstone">
+          <h3>Yellowstone (640K years ago)</h3>
+          <img src="img/yellowstone.jpg" class="img-responsive" alt="responsive image" alt-text="yellowstone" style="width: 100%;">
+          <p>
+            Yellowstone National Park in Wyoming, USA is an active volcano itself. There are 3 recent eruptions with magnitude-8 (VEI 8) that we know of with varying amounts of volume.
+          </p>
+          <ul>
+            <li> 0.64 million years ago: 1,000 km^3 </li>
+            <li> 1.3 million years ago: 280 km^3 </li>
+            <li> 2.1 million years ago: 2,500 km^3 </li>
+          </ul>
+          <p> In comparison, the volume of the Puget Sound in Washington is 110km^3 </p>
+        </section>
+
+        <section data-scene="mtvesuvius">
+          <h3>Mount Vesuvius (79 AD)</h3>
+          <img src="img/mtvesuvius.jpg" class="img-responsive" alt="responsive image" alt-text="Mount Vesuvius" style="width: 100%;">
+          <p>
+            Mount Vesuvius in Italy is perhaps one of the more well known volcanoes in history. It is currently the only active volcano in Italy. Although its most recent eruption was in 1944, its most famous eruption dates back to 79 AD. This eruption destroyed the Roman cities of Pompeii and Herculaneum.
+          </p>
+        </section>
+        <section data-scene="huaynaputina">
+          <h3>Huaynaputina (1600)</h3>
+          <img src="img/huaynaputina.jpg" class="img-responsive" alt="responsive image" alt-text="Huaynaputina" style="width: 100%;">
+          <p>
+            Huaynaputina in Peru is the site of South America's largest volcanic eruption with VEI 6. The effects of the eruption affected the global climate with the coldest summers in 500 years.
+          </p>
+        </section>
+
+        <section data-scene="mtpinatubo">
+          <h3>Mount Pinatubo (1991)</h3>
+          <img src="img/mtpinatubo.jpg" class="img-responsive" alt="responsive image" alt-text="Mount Pinatubo" style="width: 100%;">
+          <p>
+            Mount Pinatubo in the Philippines erupted recently in 1991 with VEI 6. The volcano erupted more than a cubic mile into the air and the ash rose 22 miles in the atmosphere.
+          </p>
+        </section>
+
+        <section data-scene="scene3">
+          <h2>Overview of All Active Volcanoes</h2>
+          <p>There are many active volcanoes all over the world. This map view is focused on the ring of fire where there is a circle of volcanoes around the Pacific Ocean</p>
+        </section>
+        <section data-scene="scene4">
+          <h2>Effects of Eruptions of Society</h2>
+          <p>There are many effects eruptions can have. Homes are destroyed and the air is not safe to breath due to the ash everywhere. Depending on how much ash is deposited, it can break rooftops with the volume and weight. Volcanic eruptions can also affect the climate such as seen with Mount Tambora's eruption leading to the "Year Without Summer". <p>
+          </section>
+          <section data-scene="scene5">
+            <h2>How to Help</h2>
+            <p>Volcano observatories are a crucial tool for governments to reduce the impacts of volcanic eruptions. Governments, scientists, and local citizens are responsible to support the efforts of these institutions to make those at risk safer. Here are ways to support volcano observations</p>
+            <ul>
+              <li>
+                <img src="img/usgs.PNG" alt="USGS logo" />
+                <a href="https://volcanoes.usgs.gov/index.html">USGS science for a changing world</a>
+              </li>
+              <li>
+                <img src="img/epa.PNG" alt="EPA logo" />
+                <a href="https://www.epa.gov/natural-disasters/volcanoes">US Environmental Protection Agency</a>
+              </li>
+              <li>
+                <a href="https://temblor.net/earthquake-insights/volcano-observatories-reduce-risk-around-the-globe-heres-how-we-can-support-them-10848/">Further Reading on Support</a>
+              </li>
+            </ul>
+          </section>
+
+            <section data-scene="end" data-background="img/home-volcano-eruption.jpg">
+                <div class="fullscreen text-center">
+                    <h1 class="display-4 d-flex justify-content-center">Thanks for watching!!!</h1>
+                    <small class="d-flex justify-content-center" style="color: rgba(255,255,255,0.95)">Geography 458
+                    </small>
+                </div>
+            </section>
+
+
+
+        </div>
+        <!--map div-->
+        <div class="col-sm-6 col-md-8 storymap-map"></div>
+    </div>
+
+
+</div>
+
+<!-- main javascript -->
+<script type="text/javascript">
+
+
+    // Create Legend Contents in html format
+    var county_legend = '<i style="background: orange; opacity: 0.5"></i><p><b>Counties</b></p>';
+    var forest_legend = '<i style="background: green; opacity: 0.5"></i><p><b>Forest</b></p>';
+
+    var towers_circle2 = L.geoJson.ajax('../../assets/cell_towers.geojson', {
+       pointToLayer: function (feature, latlng) {
+           //return L.circle(latlng, 1000 * Math.pow(Math.floor((Math.random() * 3) + 1), 2));
+           return L.marker(latlng, {icon: L.divIcon({className: 'glyphicon glyphicon-one-fine-smaller-dot glow-effect'})});
+       },
+       onEachFeature: function (feature, layer) {
+           layer.bindTooltip(feature.properties.Name, {sticky: true, className: "feature-tooltip"});
+       }
+   });
+
+    var layers = {
+        outdoors: {
+            layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
+                id: 'mapbox.outdoors'
+            })
+        },
+        vlayer: {
+            layer: L.geoJson.ajax('assets/volcanoes.json', {})
+        },
+    };
+
+
+    var scenes = {
+        overview: {lat: 33.868457, lng: -175.945642, zoom: 7, name: 'Cover Page', layers: []},
+        kinds: {lat: 33.868457, lng: -175.945642, zoom: 3, name: 'types', layers: []},
+        eruptions: {lat: 33.868457, lng: -175.945642, zoom: 3, name: 'eruptions intro', layers: [layers.vlayer]},
+        yellowstone: {lat: 44.43, lng: -110.67, zoom: 11, name: 'Yellowstone', layers: [layers.vlayer]},
+        mtvesuvius: {lat: 40.821, lng: 14.426, zoom: 13, name: 'Mount Vesuvius', layers: [layers.vlayer]},
+        huaynaputina: {lat: -16.608, lng: -70.85, zoom: 11, name: 'Huaynaputina', layers: [layers.vlayer]},
+        mtpinatubo: {lat: 15.13, lng: 120.35, zoom: 14, name: 'Mount Pinatubo', layers: [layers.vlayer]},
+        scene3: {lat: 33.868457, lng: -175.945642, zoom: 3, name: 'All Active', layers: [layers.vlayer]},
+        scene4: {lat: 33.868457, lng: -175.945642, zoom: 7, name: 'Effects', layers: []},
+        scene5: {lat: 33.868457, lng: -175.945642, zoom: 7, name: 'How to Help', layers: []},
+        end: {lat: 33.868457, lng: -175.945642, zoom: 7, name: 'The End'}
+    };
+
+    $('#storymap').storymap({
+        scenes: scenes,
+        baselayer: layers.outdoors,
+        legend: true, // if you do not want a legend feature, you can simply not define the createLegend function.
+        credits: "",
+        loader: true,
+        scalebar: false,
+        flyo: true,
+        navwidget: true,
+
+        createMap: function () {
+            // create a map in the "map" div, set the view to a given place and zoom
+            var map = L.map($(".storymap-map")[0], {
+                zoomControl: false, scrollWheelZoom: false, fadeAnimation: true,
+                zoomAnimation: true
+            }).setView([44, -120], 7);
+
+            return map;
+        }
+
+    });
+</script>
+</body>
+</html>

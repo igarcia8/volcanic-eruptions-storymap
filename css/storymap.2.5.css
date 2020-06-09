@@ -1,3 +1,4 @@
+/*Updated on 02/24/2018| version 2.5 | MIT License*/
 html {
     height: 100%;
 }
@@ -333,4 +334,8 @@ nav .navbar-brand {
 .btn:hover {
     color: rgba(0, 117, 255, 0.6);
     text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
 }
