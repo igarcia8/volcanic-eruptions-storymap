@@ -6,6 +6,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
+
+
   <!--add required stylesheets-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <!--leaflet css-->
@@ -13,11 +19,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+  <!--add favicon for the web page-->
+  <link rel="shortcut icon" href="../../img/favicon.ico" type="image/x-icon">
 
+  <!--Font-->
+  <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="../../dist/storymap.2.5.css">
   <!--add required libraries-->
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
-  <!--jquery and Popper-->
+  <!--jquery-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 
@@ -26,23 +38,19 @@
   <!--leaflet.ajax for asynchronously adding geojson data-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
 
-  <!-- bing map -->
-  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise"></script>
-  <script src="https://gmaclennan.github.io/leaflet-bing-layer/leaflet-bing-layer.js"></script>
-
-  <!-- mini globle map -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
-  <script src="js/globeminimap.js"></script>
-
   <!--story map plugin-->
   <script src="js/index.js"></script>
+
+  <style>
+  #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
 </head>
 
 <body>
 
 
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark storymap-navbar">
+    <a class="navbar-brand" href="#">Volcanoes in the World</a>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
@@ -64,28 +72,27 @@
     </div>
   </nav>
 
-  <div id="storymap" class="container-fluid" >
+  <div id="storymap" class="container-fluid storymap" >
     <div class="row">
       <div class="col-sm-6 col-md-4 storymap-story">
         <section data-scene="overview" data-background="img/home-volcano-eruption.jpg">
           <div class="fullscreen text-center">
             <!-- FIX LATER -->
-            <h1 class="display-4 d-flex justify-content-center">Volcanoes in the World</h1>
-            <!-- <img src="img/home-volcano-eruption.jpg" /> -->
+            <h1 class="display-4 d-flex justify-content-center">^^^^^^^^^^^^</h1>
 
             <small class="d-flex justify-content-center" style="color: rgba(255,255,255,0.95)">This story map
               illustrates the volcanoes on Earth
             </small>
           </div>
         </section>
-        <section data-scene="scene1">
+        <section data-scene="scene1" class="viewing">
           <h2>Common Types of Volcanoes</h2>
-          <img src="img/shapes.jpg" class="img-responsive" alt="responsive image" alt-text="Shapes of volcanoes">
+          <img src="img/shapes.jpg" class="img-responsive" alt="responsive image" alt-text="Shapes of volcanoes" style="width: 100%;">
           <h3>Cinder Cone</h3>
           <p>
             Cinder cone volcanoes are the most common type of volcanoes. Cinder cone volcanoes have the shape that most people think of volcanoes.
           </p>
-          <h3>Stratovolcanoes</h3>
+          <h3>Stratovolcanoes / Composite</h3>
           <ul>
             <li> Built of lava flow, ash and blocks of unmelted stone</li>
             <li> Most violent type of volcano </li>
@@ -103,11 +110,11 @@
             <li> They are often formed in the craters of stratovolcanoes </li>
           </ul>
         </section>
-        <section data-scene="scene2">
+        <section data-scene="scene2" >
           <h2>Major Eruptions</h2>
           <p> VEI or Volcanic Explosivity Index is calculated by the volume of material erupted. It is a relative measure of the explosiveness of volcanic eruptions. The higher the number, the more explosive.
             <h3>Yellowstone (640K years ago)</h3>
-            <img src="img/yellowstone.jpg" class="img-responsive" alt="responsive image" alt-text="yellowstone">
+            <img src="img/yellowstone.jpg" class="img-responsive" alt="responsive image" alt-text="yellowstone" style="width: 100%;">
             <p>
               Yellowstone National Park in Wyoming, USA is an active volcano itself. There are 3 recent eruptions with magnitude-8 (VEI 8) that we know of with varying amounts of volume.
             </p>
@@ -118,24 +125,23 @@
             </ul>
             <p> In comparison, the volume of the Puget Sound in Washington is 110km^3 </p>
             <h3>Mount Vesuvius (79 AD)</h3>
-            <img src="img/mtvesuvius.jpg" class="img-responsive" alt="responsive image" alt-text="Mount Vesuvius">
+            <img src="img/mtvesuvius.jpg" class="img-responsive" alt="responsive image" alt-text="Mount Vesuvius" style="width: 100%;">
             <p>
               Mount Vesuvius in Italy is perhaps one of the more well known volcanoes in history. It is currently the only active volcano in Italy. Although its most recent eruption was in 1944, its most famous eruption dates back to 79 AD. This eruption destroyed the Roman cities of Pompeii and Herculaneum.
             </p>
             <h3>Huaynaputina (1600)</h3>
-            <img src="img/huaynaputina.jpg" class="img-responsive" alt="responsive image" alt-text="Huaynaputina">
+            <img src="img/huaynaputina.jpg" class="img-responsive" alt="responsive image" alt-text="Huaynaputina" style="width: 100%;">
             <p>
               Huaynaputina in Peru is the site of South America's largest volcanic eruption with VEI 6. The effects of the eruption affected the global climate with the coldest summers in 500 years.
             </p>
             <h3>Mount Pinatubo (1991)</h3>
-            <img src="img/mtpinatubo.jpg" class="img-responsive" alt="responsive image" alt-text="Mount Pinatubo">
+            <img src="img/mtpinatubo.jpg" class="img-responsive" alt="responsive image" alt-text="Mount Pinatubo" style="width: 100%;">
             <p>
               Mount Pinatubo in the Philippines erupted recently in 1991 with VEI 6. The volcano erupted more than a cubic mile into the air and the ash rose 22 miles in the atmosphere.
             </p>
           </section>
           <section data-scene="scene3">
             <h2>Map of All Active Volcanoes</h2>
-            <div id="map"></div>
           </section>
           <section data-scene="scene4">
             <h2>Effects of Eruptions of Society</h2>
@@ -166,60 +172,16 @@
       <footer></footer>
 
       <script type="text/javascript">
-    /**
-     * Created by jakob on 2/22/2017.
-     */
+      mapboxgl.accessToken = 'pk.eyJ1IjoiaXNnYXJjaWE4IiwiYSI6ImNrOGY1b2h0YTAwdXMzbG56OGk3ZG51b3gifQ.nb--h6CKMb-Go93dNnuAZg';
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/isgarcia8/ckb7c16df17cw1io1ubjsyjl8',
+        center: [-175.945642, 33.868457],
+        zoom: 1
+      });
+      </script>
 
-// Create Legend Contents in html format
-    var county_legend ='<i style="background: black; opacity: 0.5"></i><p><b>Counties</b></p>';
-    var corvallis_admin_legend = '<i style="background: orange; opacity: 0.5"></i><p><b>Corvallis</b></p>';
-    var forest_legend = '<i style="background: green; opacity: 0.5"></i><p><b>Forest</b></p>';
-
-    // For each layer, the first variable is the layer, the second is the legend. The layer variable can be any kinds of layers that leaflet.js supports.
-    // var layers = {
-    //      'layer1': [layer1, legend1]
-    //      'layer2': [layer2, legend2]
-    //      ...
-    // }
-
-    var layers = {
-        'layer 1': [ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {id: 'mapbox.outdoors'})],
-        'layer 2': [ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {id: 'mapbox.outdoors'})],
-        'layer 3': [ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {id: 'mapbox.outdoors'})],
-        'layer 4': [ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {id: 'mapbox.outdoors'})],
-        'layer 5': [ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {id: 'mapbox.outdoors'})],
-        'layer 6': [ L.geoJson.ajax('assets/PointPlaces.geojson', county_legend)],
-        'layer 7': [ L.geoJson.ajax('assets/oregonski.geojson', county_legend)]
-        };
-
-    var scenes = {
-        Oregon: {lat: 44.053932, lng: -122.7814109, zoom: 7, layers: ['layer 1','layer 6']},
-        CraterLake: {lat: 42.9357625, lng: -122.2, zoom: 12, layers: ['layer 1','layer 6']},
-        MtHood: {lat: 45.373514, lng: -121.799, zoom: 12, layers: ['layer 2','layer 6', 'layer 7']},
-        Steens: {lat: 42.636418, lng: -118.878, zoom: 10, layers: ['layer 3','layer 6']},
-        Haystack: {lat: 45.88472, lng: -123.9696836, zoom: 15, layers: ['layer 4','layer 6']},
-        CrownPt: {lat: 45.5395, lng: -122.2458415, zoom: 18, layers: ['layer 5','layer 6']}
-    };
-
-    $('.main').storymap({
-        scenes: scenes,
-        layers: layers,
-        legend: true, // if you do not want a legend feature, you can simply not define the createLegend function.
-        createMap: function () {
-            // create a map in the "map" div, set the view to a given place and zoom
-            var map = L.map('map', {zoomControl: false, scrollWheelZoom: false});
-
-            // add an base map, which can be either OSM, mapbox, tilelayer, wmslayer or those designed by yourself.
-            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
-                maxZoom: 18,
-                attribution: '<a target="_blank">Riley Johnson</a>',
-                id: 'mapbox.outdoors',
-                detectRetina: true
-            }).addTo(map);
-
-            L.control.scale({position: 'bottomright', metric: false}).addTo(map);
-    });
-</script>
+      <div class="storymap-trigger" style="top: 30%;"></div>
     </body>
 
     </html>
