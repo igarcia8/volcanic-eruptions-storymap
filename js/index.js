@@ -1,7 +1,7 @@
 'use strict';
 
 // storymap_data can be an URL or a Javascript object
-// let storymap_data = 'data/volcanoes.json';
+
 
 (function ($) {
 
