@@ -127,8 +127,12 @@
           <p>There are many active volcanoes all over the world. This map view is focused on the ring of fire where there is a circle of volcanoes around the Pacific Ocean</p>
         </section>
         <section data-scene="scene4">
-          <h2>Effects of Eruptions of Society</h2>
-          <p>There are many effects eruptions can have. Homes are destroyed and the air is not safe to breath due to the ash everywhere. Depending on how much ash is deposited, it can break rooftops with the volume and weight. Volcanic eruptions can also affect the climate such as seen with Mount Tambora's eruption leading to the "Year Without Summer". <p>
+          <h2>Effects of Eruptions of Society and Environment</h2>
+          <p>There are many effects eruptions can have. </p>
+          <h3>Volcanic Ash</h3>
+          <p>Volcanic ash is made of rock, minerals and volcanic glass. It can be grainy like sand or very fine like powder. Homes are destroyed and the air is not safe to breath due to the ash everywhere. Depending on how much ash is deposited, it can break rooftops with the volume and weight. The ash is also very abrasive to skin and eyes causing damage and inflamation</p>
+          <h3>Environmental Impact</h3>
+          <p> Volcanic eruptions can also affect the climate such as seen with Mount Tambora's eruption leading to the "Year Without Summer". This is known as a "volcanic winter". Another environmental impact is widespread crop failer and famine due to the ash.</p>
           </section>
           <section data-scene="scene5">
             <h2>How to Help</h2>
@@ -148,7 +152,7 @@
             </ul>
           </section>
 
-            <section data-scene="end" data-background="img/home-volcano-eruption.jpg">
+            <section data-scene="end" data-background="img/volcanoend.jpg">
                 <div class="fullscreen text-center">
                     <h1 class="display-4 d-flex justify-content-center">Thanks for watching!!!</h1>
                     <small class="d-flex justify-content-center" style="color: rgba(255,255,255,0.95)">Geography 458
@@ -180,7 +184,7 @@
     var layers = {
       outdoors: {
         layer: L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw', {
-          id: 'mapbox.outdoors'
+          id: 'mapbox.satellite'
         })
       },
       vlayer: {
@@ -194,16 +198,16 @@
         })
       },
       yellowstoneicon: {
-        layer: L.marker([44.43, -110.67], {icon: volIcon}).bindPopup('<center><b>Yellowstone Caldera</b><img src= "img/yellowstone.jpg"  width="300"><br>67 Kanda Neribeicho, Chiyoda City, Tokyo 101-0022<br>(<a href="http://akiba2960.com/" target="_blank">Website</a>)<br><br>Akiba Fukurou (which translates to Akiba Owl) is one of the many owl cafes in Japan, located just a five minute walk from Akihabara Station in Tokyo. Reservations are recommended as the cafe is in a prime location for tourists. Admission is 1500 yen (around $15 per person) for a one-hour visit. This includes a holding two owls, a laminated photo of you and your owl of choice, and unlimited petting/photos with the other owls.', {maxWidth: "350"})
+        layer: L.marker([44.43, -110.67], {icon: volIcon}).bindPopup('<center><b>Yellowstone Caldera</b><img src= "img/yellowstonepop.jpg"  width="300"><br>Elevation: 9,203 ft.<br>(<a href="https://en.wikipedia.org/wiki/Yellowstone_Caldera" target="_blank">More Info</a>)', {maxWidth: "350"})
       },
       vesuviusicon: {
-        layer: L.marker([40.821, 14.426], {icon: volIcon}).bindPopup('<center><b>Mount Vesuvius</b><img src= "img/mtvesuvius.jpg" width="300"><br>67 Kanda Neribeicho, Chiyoda City, Tokyo 101-0022<br>(<a href="http://akiba2960.com/" target="_blank">Website</a>)<br><br>Akiba Fukurou (which translates to Akiba Owl) is one of the many owl cafes in Japan, located just a five minute walk from Akihabara Station in Tokyo. Reservations are recommended as the cafe is in a prime location for tourists. Admission is 1500 yen (around $15 per person) for a one-hour visit. This includes a holding two owls, a laminated photo of you and your owl of choice, and unlimited petting/photos with the other owls.', {maxWidth: "350"})
+        layer: L.marker([40.821, 14.426], {icon: volIcon}).bindPopup('<center><b>Mount Vesuvius</b><img src= "img/vesuviuspop.PNG" width="300"><br>Elevation: 1,281 ft.<br>(<a href="https://en.wikipedia.org/wiki/Mount_Vesuvius" target="_blank">More Info</a>)', {maxWidth: "350"})
       },
       huaynaputinaicon: {
-        layer: L.marker([-16.608, -70.85], {icon: volIcon}).bindPopup('<center><b>Huaynaputina</b><img src= "img/huaynaputina.jpg" width="300"><br>67 Kanda Neribeicho, Chiyoda City, Tokyo 101-0022<br>(<a href="http://akiba2960.com/" target="_blank">Website</a>)<br><br>Akiba Fukurou (which translates to Akiba Owl) is one of the many owl cafes in Japan, located just a five minute walk from Akihabara Station in Tokyo. Reservations are recommended as the cafe is in a prime location for tourists. Admission is 1500 yen (around $15 per person) for a one-hour visit. This includes a holding two owls, a laminated photo of you and your owl of choice, and unlimited petting/photos with the other owls.', {maxWidth: "350"})
+        layer: L.marker([-16.608, -70.85], {icon: volIcon}).bindPopup('<center><b>Huaynaputina</b><img src= "img/huaynaputinapop.jpg" width="300"><br>Elevation: 15,900 ft.<br>(<a href="https://en.wikipedia.org/wiki/Huaynaputina" target="_blank">More Info</a>)', {maxWidth: "350"})
       },
       pinatuboicon: {
-        layer: L.marker([15.13, 120.35], {icon: volIcon}).bindPopup('<center><b>Mount Pinatubo</b><img src= "img/mtpinatubo.jpg" width="300"><br>67 Kanda Neribeicho, Chiyoda City, Tokyo 101-0022<br>(<a href="http://akiba2960.com/" target="_blank">Website</a>)<br><br>Akiba Fukurou (which translates to Akiba Owl) is one of the many owl cafes in Japan, located just a five minute walk from Akihabara Station in Tokyo. Reservations are recommended as the cafe is in a prime location for tourists. Admission is 1500 yen (around $15 per person) for a one-hour visit. This includes a holding two owls, a laminated photo of you and your owl of choice, and unlimited petting/photos with the other owls.', {maxWidth: "350"})
+        layer: L.marker([15.13, 120.35], {icon: volIcon}).bindPopup('<center><b>Mount Pinatubo</b><img src= "img/pinatubopop.jpg" width="300"><br>Elevation: 4,875 ft (5,725 ft before 1991)<br>(<a href="https://en.wikipedia.org/wiki/Mount_Pinatubo" target="_blank">More Info</a>)', {maxWidth: "350"})
       }
   };
 

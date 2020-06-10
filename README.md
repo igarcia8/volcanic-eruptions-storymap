@@ -1,7 +1,11 @@
 # Volcanoes Around the globe
 ## About
 This storymap is about volcano eruptions on Earth. The storymap takes a look at four of many significant eruptions throughout time.
-The goal of this project is to educate the general public about volcanoes.
+
+Here is the storymap: https://igarcia8.github.io/volcanic-eruptions-storymap/
+
+### Goal
+The goal of this project is to educate the general public about volcanoes. This is an introduction to volcanoes that can be used to call attention to the importance of volcanic monitoring.
 
 ![Home page](img/home.PNG)
 
@@ -9,6 +13,7 @@ The goal of this project is to educate the general public about volcanoes.
 * The volcanic locational json data is sourced from the [Humanitarian Data Exchange](https://data.humdata.org/dataset/a60ac839-920d-435a-bf7d-25855602699d/resource/7234d067-2d74-449a-9c61-22ae6d98d928)
 * The supporting facts are sourced from !Live Science](livescience.com) and the [United States Geological Survey](usgs.gov)
 * Images from [Unsplash](Unsplash.com) , and other sources located in the excel file
+* The map and icon used are from [Mapbox](mapbox.com)
 
 
 ## Applied libraries
@@ -31,3 +36,4 @@ Mini Globle Map
 
 
 ## Acknowledgements
+Thanks to [Bo Zhao](https://github.com/jakobzhao) for the storymap [template](https://github.com/jakobzhao/storymap-test)
