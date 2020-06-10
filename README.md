@@ -3,6 +3,8 @@
 This storymap is about volcano eruptions on Earth. The storymap takes a look at four of many significant eruptions throughout time.
 The goal of this project is to educate the general public about volcanoes.
 
+![Home page](img/home.PNG)
+
 ## Data Sources
 * The volcanic locational json data is sourced from the [Humanitarian Data Exchange](https://data.humdata.org/dataset/a60ac839-920d-435a-bf7d-25855602699d/resource/7234d067-2d74-449a-9c61-22ae6d98d928)
 * The supporting facts are sourced from !Live Science](livescience.com) and the [United States Geological Survey](usgs.gov)
