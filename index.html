@@ -173,7 +173,7 @@
     // Create Legend Contents in html format
     var county_legend = '<i style="background: orange; opacity: 0.5"></i><p><b>Counties</b></p>';
     var forest_legend = '<i style="background: green; opacity: 0.5"></i><p><b>Forest</b></p>';
-    var volIcon =L.icon({iconUrl: 'img/volcano-15-red.png', iconSize: [40,40]});
+    var volIcon =L.icon({iconUrl: 'img/volcano-15-red.png'});
     let storymap_data = L.geoJson.ajax('assets/volcanoes.json');
 
 
@@ -189,21 +189,21 @@
             layer.bindPopup(feature.properties.V_Name)
           },
           pointToLayer: function(feature, latlng){
-            return L.marker(latlng, {iconUrl: 'volIcon'})
+            return L.marker(latlng, {icon: volIcon})
           }
         })
       },
       yellowstoneicon: {
-        layer: L.marker([44.43, -110.67], {iconUrl: volIcon}).bindPopup('<center><b>Yellowstone Caldera</b><img src= "img/yellowstone.jpg"  width="300"><br>67 Kanda Neribeicho, Chiyoda City, Tokyo 101-0022<br>(<a href="http://akiba2960.com/" target="_blank">Website</a>)<br><br>Akiba Fukurou (which translates to Akiba Owl) is one of the many owl cafes in Japan, located just a five minute walk from Akihabara Station in Tokyo. Reservations are recommended as the cafe is in a prime location for tourists. Admission is 1500 yen (around $15 per person) for a one-hour visit. This includes a holding two owls, a laminated photo of you and your owl of choice, and unlimited petting/photos with the other owls.', {maxWidth: "350"})
+        layer: L.marker([44.43, -110.67], {icon: volIcon}).bindPopup('<center><b>Yellowstone Caldera</b><img src= "img/yellowstone.jpg"  width="300"><br>67 Kanda Neribeicho, Chiyoda City, Tokyo 101-0022<br>(<a href="http://akiba2960.com/" target="_blank">Website</a>)<br><br>Akiba Fukurou (which translates to Akiba Owl) is one of the many owl cafes in Japan, located just a five minute walk from Akihabara Station in Tokyo. Reservations are recommended as the cafe is in a prime location for tourists. Admission is 1500 yen (around $15 per person) for a one-hour visit. This includes a holding two owls, a laminated photo of you and your owl of choice, and unlimited petting/photos with the other owls.', {maxWidth: "350"})
       },
       vesuviusicon: {
-        layer: L.marker([40.821, 14.426]).bindPopup('<center><b>Mount Vesuvius</b><img src= "img/mtvesuvius.jpg" width="300"><br>67 Kanda Neribeicho, Chiyoda City, Tokyo 101-0022<br>(<a href="http://akiba2960.com/" target="_blank">Website</a>)<br><br>Akiba Fukurou (which translates to Akiba Owl) is one of the many owl cafes in Japan, located just a five minute walk from Akihabara Station in Tokyo. Reservations are recommended as the cafe is in a prime location for tourists. Admission is 1500 yen (around $15 per person) for a one-hour visit. This includes a holding two owls, a laminated photo of you and your owl of choice, and unlimited petting/photos with the other owls.', {maxWidth: "350"})
+        layer: L.marker([40.821, 14.426], {icon: volIcon}).bindPopup('<center><b>Mount Vesuvius</b><img src= "img/mtvesuvius.jpg" width="300"><br>67 Kanda Neribeicho, Chiyoda City, Tokyo 101-0022<br>(<a href="http://akiba2960.com/" target="_blank">Website</a>)<br><br>Akiba Fukurou (which translates to Akiba Owl) is one of the many owl cafes in Japan, located just a five minute walk from Akihabara Station in Tokyo. Reservations are recommended as the cafe is in a prime location for tourists. Admission is 1500 yen (around $15 per person) for a one-hour visit. This includes a holding two owls, a laminated photo of you and your owl of choice, and unlimited petting/photos with the other owls.', {maxWidth: "350"})
       },
       huaynaputinaicon: {
-        layer: L.marker([-16.608, -70.85]).bindPopup('<center><b>Huaynaputina</b><img src= "img/huaynaputina.jpg" width="300"><br>67 Kanda Neribeicho, Chiyoda City, Tokyo 101-0022<br>(<a href="http://akiba2960.com/" target="_blank">Website</a>)<br><br>Akiba Fukurou (which translates to Akiba Owl) is one of the many owl cafes in Japan, located just a five minute walk from Akihabara Station in Tokyo. Reservations are recommended as the cafe is in a prime location for tourists. Admission is 1500 yen (around $15 per person) for a one-hour visit. This includes a holding two owls, a laminated photo of you and your owl of choice, and unlimited petting/photos with the other owls.', {maxWidth: "350"})
+        layer: L.marker([-16.608, -70.85], {icon: volIcon}).bindPopup('<center><b>Huaynaputina</b><img src= "img/huaynaputina.jpg" width="300"><br>67 Kanda Neribeicho, Chiyoda City, Tokyo 101-0022<br>(<a href="http://akiba2960.com/" target="_blank">Website</a>)<br><br>Akiba Fukurou (which translates to Akiba Owl) is one of the many owl cafes in Japan, located just a five minute walk from Akihabara Station in Tokyo. Reservations are recommended as the cafe is in a prime location for tourists. Admission is 1500 yen (around $15 per person) for a one-hour visit. This includes a holding two owls, a laminated photo of you and your owl of choice, and unlimited petting/photos with the other owls.', {maxWidth: "350"})
       },
       pinatuboicon: {
-        layer: L.marker([15.13, 120.35]).bindPopup('<center><b>Mount Pinatubo</b><img src= "img/mtpinatubo.jpg" width="300"><br>67 Kanda Neribeicho, Chiyoda City, Tokyo 101-0022<br>(<a href="http://akiba2960.com/" target="_blank">Website</a>)<br><br>Akiba Fukurou (which translates to Akiba Owl) is one of the many owl cafes in Japan, located just a five minute walk from Akihabara Station in Tokyo. Reservations are recommended as the cafe is in a prime location for tourists. Admission is 1500 yen (around $15 per person) for a one-hour visit. This includes a holding two owls, a laminated photo of you and your owl of choice, and unlimited petting/photos with the other owls.', {maxWidth: "350"})
+        layer: L.marker([15.13, 120.35], {icon: volIcon}).bindPopup('<center><b>Mount Pinatubo</b><img src= "img/mtpinatubo.jpg" width="300"><br>67 Kanda Neribeicho, Chiyoda City, Tokyo 101-0022<br>(<a href="http://akiba2960.com/" target="_blank">Website</a>)<br><br>Akiba Fukurou (which translates to Akiba Owl) is one of the many owl cafes in Japan, located just a five minute walk from Akihabara Station in Tokyo. Reservations are recommended as the cafe is in a prime location for tourists. Admission is 1500 yen (around $15 per person) for a one-hour visit. This includes a holding two owls, a laminated photo of you and your owl of choice, and unlimited petting/photos with the other owls.', {maxWidth: "350"})
       }
   };
 
@@ -212,20 +212,15 @@
         overview: {lat: 33.868457, lng: -175.945642, zoom: 7, name: 'Cover Page', layers: []},
         kinds: {lat: 33.868457, lng: -175.945642, zoom: 3, name: 'types', layers: []},
         eruptions: {lat: 33.868457, lng: -175.945642, zoom: 3, name: 'eruptions intro', layers: [layers.vlayer]},
-        yellowstone: {lat: 44.43, lng: -110.67, zoom: 11, name: 'Yellowstone', layers: [layers.vlayer, layers.yellowstoneicon]},
-        mtvesuvius: {lat: 40.821, lng: 14.426, zoom: 13, name: 'Mount Vesuvius', layers: [layers.vlayer, layers.vesuviusicon]},
-        huaynaputina: {lat: -16.608, lng: -70.85, zoom: 11, name: 'Huaynaputina', layers: [layers.vlayer, layers.huaynaputinaicon]},
-        mtpinatubo: {lat: 15.13, lng: 120.35, zoom: 14, name: 'Mount Pinatubo', layers: [layers.vlayer, layers.pinatuboicon]},
+        yellowstone: {lat: 44.43, lng: -110.67, zoom: 11, name: 'Yellowstone', layers: [layers.yellowstoneicon]},
+        mtvesuvius: {lat: 40.821, lng: 14.426, zoom: 13, name: 'Mount Vesuvius', layers: [layers.vesuviusicon]},
+        huaynaputina: {lat: -16.608, lng: -70.85, zoom: 11, name: 'Huaynaputina', layers: [layers.huaynaputinaicon]},
+        mtpinatubo: {lat: 15.13, lng: 120.35, zoom: 14, name: 'Mount Pinatubo', layers: [layers.pinatuboicon]},
         scene3: {lat: 33.868457, lng: -175.945642, zoom: 3, name: 'All Active', layers: [layers.vlayer]},
         scene4: {lat: 33.868457, lng: -175.945642, zoom: 7, name: 'Effects', layers: []},
         scene5: {lat: 33.868457, lng: -175.945642, zoom: 7, name: 'How to Help', layers: []},
         end: {lat: 33.868457, lng: -175.945642, zoom: 7, name: 'The End'}
     };
-
-
-    // , layers.vesuviusicon
-    // , layers.huaynaputinaicon
-    // , layers.pinatuboicon
 
     $('#storymap').storymap({
         scenes: scenes,
